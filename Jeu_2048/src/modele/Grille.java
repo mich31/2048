@@ -17,9 +17,9 @@ public class Grille
     
     public Grille()
     {
-        initGrille();
         score = 0;
         nb_cases = 4;
+        initGrille();
     }
     
     public void initGrille()

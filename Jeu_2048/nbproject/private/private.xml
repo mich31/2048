@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/michel/NetBeansProjects/Jeu_2048/src/modele/Coordonnees.java</file>
-            <file>file:/home/michel/NetBeansProjects/Jeu_2048/src/jeu_2048/Jeu_2048.java</file>
             <file>file:/home/michel/NetBeansProjects/Jeu_2048/src/modele/Grille.java</file>
             <file>file:/home/michel/NetBeansProjects/Jeu_2048/src/modele/Tuile.java</file>
+            <file>file:/home/michel/NetBeansProjects/Jeu_2048/src/vue/Jeu_2048.java</file>
         </group>
     </open-files>
 </project-private>
