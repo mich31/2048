@@ -5,24 +5,23 @@
  */
 package controlleur;
 
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
+import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import modele.*;
+//import vue.*;
 
 
 /**
  *
  * @author michel
  */
-public class control extends Observable
+public class Control 
 {
     
-    public control()
-    {
-       
-    }
-    
-    
-    
+    Grille g;  
+ 
 }

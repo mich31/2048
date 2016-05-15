@@ -153,6 +153,17 @@ public class Grille extends Observable
         t2.setDrapeau(true);
     }
     
+    public void init()
+    {
+        for(int i=0;i<getNb_cases();i++)
+        {
+            for(int j=0;j<getNb_cases();j++)
+            {
+                g[i][j].setDrapeau(true);
+            }
+        }
+    }
+    
     public boolean mouvement(Direction d)
     {
         boolean mouv = false;
@@ -249,6 +260,8 @@ public class Grille extends Observable
                 }
                 break;
         }
+        init();
+        ajoutAleatoireTuile();
         
         return mouv;
     }

@@ -5,6 +5,7 @@
  */
 package jeu_2048;
 
+import controlleur.Control;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -29,18 +31,19 @@ import modele.*;
 public class Jeu extends Application implements Observer
 {
     private Grille obj_g;
+    private Control obj_control;
     private Stage st;
     
     public Jeu()
     {
         this.obj_g = new Grille();
-        
+        obj_g.ajoutAleatoireTuile();
+        obj_g.addObserver(this);
+        /*obj_g.ajoutAleatoireTuile();
         obj_g.ajoutAleatoireTuile();
         obj_g.ajoutAleatoireTuile();
         obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();
+        obj_g.ajoutAleatoireTuile();*/
         obj_g.affichageGrille();
     }
     
@@ -52,6 +55,34 @@ public class Jeu extends Application implements Observer
         // Scene(parent,width,height,color)
         Scene scene = new Scene(root, 500, 500,Color.WHITE);
         primaryStage.setResizable(false);
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+           public void handle(final KeyEvent k)
+           {
+               
+               switch(k.getCode())
+               {
+                   case UP:
+                      obj_g.mouvement(Grille.Direction.HAUT);
+                      obj_g.notifyObserver();
+                      break;
+                   case DOWN:
+                       obj_g.mouvement(Grille.Direction.BAS);
+                       obj_g.notifyObserver();
+                       break;
+                   case LEFT:
+                       obj_g.mouvement(Grille.Direction.GAUCHE);
+                       obj_g.notifyObserver();
+                       break;
+                   case RIGHT:
+                       obj_g.mouvement(Grille.Direction.DROITE);
+                       obj_g.notifyObserver();
+                       break;
+                   default:
+                       break;
+               }
+           }
+       });
         
         Rectangle grille = new Rectangle();
         grille.setX(180);
@@ -151,6 +182,7 @@ public class Jeu extends Application implements Observer
     @Override
     public void update(Observable o, Object arg) 
     {
+        
         start(st);
     }
     
