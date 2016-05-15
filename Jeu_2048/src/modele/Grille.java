@@ -24,10 +24,10 @@ public class Grille
     
     public void initGrille()
     {
-        g = new Tuile[nb_cases][nb_cases];
-        for(int i = 0;i<nb_cases;i++) //ligne
+        setG(new Tuile[getNb_cases()][getNb_cases()]);
+        for(int i = 0;i<getNb_cases();i++) //ligne
         {
-            for(int j = 0;j<nb_cases;j++) //colonne
+            for(int j = 0;j<getNb_cases();j++) //colonne
             {
                 Coordonnees c = new Coordonnees(j,i);
                 g[i][j] = new Tuile(c);
@@ -97,6 +97,27 @@ public class Grille
         
         score = score + n;
     }
+
+    /**
+     * @param g the g to set
+     */
+    public void setG(Tuile[][] g) {
+        this.g = g;
+    }
+
+    /**
+     * @return the nb_cases
+     */
+    public int getNb_cases() {
+        return nb_cases;
+    }
+
+    /**
+     * @param nb_cases the nb_cases to set
+     */
+    public void setNb_cases(int nb_cases) {
+        this.nb_cases = nb_cases;
+    }
     
     public enum Direction
     {
@@ -122,9 +143,9 @@ public class Grille
         switch(d)
         {
             case GAUCHE:
-                for(int i=0;i<nb_cases;i++)
+                for(int i=0;i<getNb_cases();i++)
                 {
-                    for(int j=1;j<nb_cases;j++)
+                    for(int j=1;j<getNb_cases();j++)
                     {
                         /*if(estEgal(g[i][j], g[i][j+1]) && g[i][j].getValeur() != 0)
                         {
@@ -148,18 +169,18 @@ public class Grille
                 break;
                 
             case DROITE:
-                for(int i = 0;i<nb_cases;i++)
+                for(int i = 0;i<getNb_cases();i++)
                 {
-                    for(int j = nb_cases-2;j>=0;j--)
+                    for(int j = getNb_cases()-2;j>=0;j--)
                     {
                         k=j;
-                        while(k!=nb_cases-1 && g[i][k].getValeur()!=0 && g[i][k+1].getValeur() == 0)
+                        while(k!=getNb_cases()-1 && g[i][k].getValeur()!=0 && g[i][k+1].getValeur() == 0)
                         {
                             deplace(g[i][k+1],g[i][k]);
                             k++;
                             mouv = true;
                         }
-                        if(k!=nb_cases-1 && estEgal(g[i][k], g[i][k+1]) && g[i][k+1].getValeur()!=0)
+                        if(k!=getNb_cases()-1 && estEgal(g[i][k], g[i][k+1]) && g[i][k+1].getValeur()!=0)
                         {
                             addition(g[i][k+1],g[i][k]);
                             mouv = true;
@@ -169,9 +190,9 @@ public class Grille
                 break;
                 
             case HAUT:
-                for(int j = 0;j<nb_cases;j++)
+                for(int j = 0;j<getNb_cases();j++)
                 {
-                    for(int i = 1;i<nb_cases;i++)
+                    for(int i = 1;i<getNb_cases();i++)
                     {
                         k=i;
                         while(k!=0 && g[k][j].getValeur()!=0 && g[k-1][j].getValeur() == 0)
@@ -190,18 +211,18 @@ public class Grille
                 break;
                 
             case BAS:
-                for(int j = 0;j<nb_cases;j++)
+                for(int j = 0;j<getNb_cases();j++)
                 {
-                    for(int i = nb_cases-2;i>=0;i--)
+                    for(int i = getNb_cases()-2;i>=0;i--)
                     {
                         k=i;
-                        while(k!=nb_cases-1 && g[k][j].getValeur()!=0 && g[k+1][j].getValeur() == 0)
+                        while(k!=getNb_cases()-1 && g[k][j].getValeur()!=0 && g[k+1][j].getValeur() == 0)
                         {
                             deplace(g[k+1][j],g[k][j]);
                             k++;
                             mouv = true;
                         }
-                        if(k!=nb_cases-1 && estEgal(g[k+1][j], g[k][j]) && g[k+1][j].getValeur()!=0)
+                        if(k!=getNb_cases()-1 && estEgal(g[k+1][j], g[k][j]) && g[k+1][j].getValeur()!=0)
                         {
                             addition(g[k+1][j],g[k][j]);
                             mouv = true;
@@ -221,13 +242,6 @@ public class Grille
      */
     public Tuile[][] getG() {
         return g;
-    }
-
-    /**
-     * @param g the g to set
-     */
-    public void setG(Tuile[][] g) {
-        this.g = g;
     }
 
     /**
