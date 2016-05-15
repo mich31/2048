@@ -5,6 +5,8 @@
  */
 package jeu_2048;
 
+import java.util.Observable;
+import java.util.Observer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,13 +26,15 @@ import modele.*;
  *
  * @author michel
  */
-public class Jeu extends Application 
+public class Jeu extends Application implements Observer
 {
     private Grille obj_g;
+    private Stage st;
     
     public Jeu()
     {
         this.obj_g = new Grille();
+        
         obj_g.ajoutAleatoireTuile();
         obj_g.ajoutAleatoireTuile();
         obj_g.ajoutAleatoireTuile();
@@ -43,7 +47,7 @@ public class Jeu extends Application
     @Override
     public void start(Stage primaryStage) 
     {
-        
+        this.st=primaryStage;
         Group root = new Group();
         // Scene(parent,width,height,color)
         Scene scene = new Scene(root, 500, 500,Color.WHITE);
@@ -66,6 +70,14 @@ public class Jeu extends Application
         Image nb2 = new Image("img/2.png");
         Image nb4 = new Image("img/4.png");
         Image nb8 = new Image("img/8.png");
+        Image nb16 = new Image("img/16.png");
+        Image nb32 = new Image("img/32.png");
+        Image nb64 = new Image("img/64.png");
+        Image nb128 = new Image("img/128.png");
+        Image nb256 = new Image("img/256.png");
+        Image nb512 = new Image("img/512.png");
+        Image nb1024 = new Image("img/1024.png");
+        Image nb2048 = new Image("img/2048.png");
         
         for(int i = 0;i<obj_g.getNb_cases();i++)
         {
@@ -88,8 +100,32 @@ public class Jeu extends Application
                     case 4:
                         case_grille.setFill(new ImagePattern(nb4));
                         break;
-                    default:
+                    case 8:
                         case_grille.setFill(new ImagePattern(nb8));
+                        break;
+                    case 16:
+                        case_grille.setFill(new ImagePattern(nb16));
+                        break;
+                    case 32:
+                        case_grille.setFill(new ImagePattern(nb32));
+                        break;
+                    case 64:
+                        case_grille.setFill(new ImagePattern(nb64));
+                        break;
+                    case 128:
+                        case_grille.setFill(new ImagePattern(nb128));
+                        break;
+                    case 256:
+                        case_grille.setFill(new ImagePattern(nb256));
+                        break;
+                    case 512:
+                        case_grille.setFill(new ImagePattern(nb512));
+                        break;
+                    case 1024:
+                        case_grille.setFill(new ImagePattern(nb1024));
+                        break;
+                    case 2048:
+                        case_grille.setFill(new ImagePattern(nb2048));
                         break;
                 }
                 
@@ -102,6 +138,7 @@ public class Jeu extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
 
     /**
      * @param args the command line arguments
@@ -109,6 +146,12 @@ public class Jeu extends Application
     public static void main(String[] args) 
     {
         launch(args);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) 
+    {
+        start(st);
     }
     
 }

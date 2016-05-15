@@ -5,15 +5,20 @@
  */
 package modele;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author michel
  */
-public class Grille 
+public class Grille extends Observable
 {
     private Tuile[][] g;
     private int score;
     private int nb_cases;
+    
+    private Observer obs;
     
     public Grille()
     {
@@ -97,6 +102,19 @@ public class Grille
         
         score = score + n;
     }
+    
+    
+    public void addObserver(Observer _obs)
+    {
+        this.obs = _obs;
+    }
+    
+    public void notifyObserver()
+    {
+        this.obs.update(this, g);
+    }
+    
+    
 
     /**
      * @param g the g to set
