@@ -164,7 +164,77 @@ public class Grille extends Observable
         }
     }
     
-    public boolean mouvement(Direction d)
+    public boolean possible()
+    {
+        boolean res = false;
+        
+        if(!grilleRemplie() || deplacementHorizontal() || deplacementVertical())
+        {
+            res = true;
+            return res;
+        }
+        
+        return res;
+    }
+    
+    // Vérifie si toutes les cases de la grille sont remplies
+    public boolean grilleRemplie()
+    {
+        boolean res = false;
+        for(int i=0;i<nb_cases;i++)
+        {
+            for(int j=0;j<nb_cases;j++)
+            {
+                if(g[i][j].getValeur() == 0)
+                {
+                    res = true;
+                    return res;
+                }
+            }
+        }
+        return res;
+    }
+    
+    public boolean deplacementHorizontal()
+    {
+        boolean res = true;
+        
+        for(int i=0;i<nb_cases;i++)
+        {
+            for(int j=0;j<nb_cases-1;j++)
+            {
+                if(estEgal(g[i][j],g[i][j+1]))
+                {
+                    return res;
+                }
+            }
+        }
+        
+        res = false;
+        return res;
+    }
+    
+    public boolean deplacementVertical()
+    {
+        boolean res = true;
+        
+        for(int i=0;i<nb_cases-1;i++)
+        {
+            for(int j=0;j<nb_cases;j++)
+            {
+                if(estEgal(g[i][j],g[i+1][j]))
+                {
+                    return res;
+                }
+            }
+        }
+        
+        res = false;
+        return res;
+    }
+    
+    
+    public void mouvement(Direction d)
     {
         boolean mouv = false;
         int k;
@@ -176,11 +246,6 @@ public class Grille extends Observable
                 {
                     for(int j=1;j<getNb_cases();j++)
                     {
-                        /*if(estEgal(g[i][j], g[i][j+1]) && g[i][j].getValeur() != 0)
-                        {
-                            addition(g[i][j],g[i][j+1]);
-                            mouv = true;
-                        }*/
                         k = j;
                         while(k!=0 && g[i][k].getValeur()!=0 && g[i][k-1].getValeur() == 0)
                         {
@@ -261,9 +326,12 @@ public class Grille extends Observable
                 break;
         }
         init();
-        ajoutAleatoireTuile();
         
-        return mouv;
+        if(mouv) //S'il y a eu un mouvement
+        {
+            ajoutAleatoireTuile();
+        }
+        
     }
     
     

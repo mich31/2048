@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jeu_2048;
+package vue_controlleur;
 
-import controlleur.Control;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.application.Application;
@@ -31,7 +30,6 @@ import modele.*;
 public class Jeu extends Application implements Observer
 {
     private Grille obj_g;
-    private Control obj_control;
     private Stage st;
     
     public Jeu()
@@ -39,11 +37,7 @@ public class Jeu extends Application implements Observer
         this.obj_g = new Grille();
         obj_g.ajoutAleatoireTuile();
         obj_g.addObserver(this);
-        /*obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();
-        obj_g.ajoutAleatoireTuile();*/
+        
         obj_g.affichageGrille();
     }
     
