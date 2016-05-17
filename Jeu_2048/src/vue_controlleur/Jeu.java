@@ -50,34 +50,35 @@ public class Jeu extends Application implements Observer
         Scene scene = new Scene(root, 500, 500,Color.WHITE);
         primaryStage.setResizable(false);
         
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
-           public void handle(final KeyEvent k)
-           {
-               
-               switch(k.getCode())
-               {
-                   case UP:
-                      obj_g.mouvement(Grille.Direction.HAUT);
-                      obj_g.notifyObserver();
-                      break;
-                   case DOWN:
-                       obj_g.mouvement(Grille.Direction.BAS);
-                       obj_g.notifyObserver();
-                       break;
-                   case LEFT:
-                       obj_g.mouvement(Grille.Direction.GAUCHE);
-                       obj_g.notifyObserver();
-                       break;
-                   case RIGHT:
-                       obj_g.mouvement(Grille.Direction.DROITE);
-                       obj_g.notifyObserver();
-                       break;
-                   default:
-                       break;
-               }
-           }
-       });
+        controlJeu(scene);
+        //affichageMenu(root);
         
+        affichageJeu(root);
+        
+        primaryStage.setTitle("2048");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    
+    public void affichageMenu(Group root)
+    {
+        Rectangle partie = new Rectangle();
+        Rectangle tuto = new Rectangle();
+        Rectangle quitter = new Rectangle();
+        
+        partie.setX(175);
+        partie.setY(100);
+        partie.setWidth(150);
+        partie.setHeight(70);
+        partie.setFill(Color.LIGHTSLATEGREY);
+        partie.setArcHeight(20);
+        partie.setArcWidth(20);
+        
+        
+        root.getChildren().add(partie);
+    }
+    public void affichageJeu(Group root)
+    {
         Rectangle grille = new Rectangle();
         grille.setX(180);
         grille.setY(180);
@@ -157,13 +158,38 @@ public class Jeu extends Application implements Observer
                 root.getChildren().add(case_grille);
             }
         }
-        
-        
-        primaryStage.setTitle("2048");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
     
+    public void controlJeu(Scene scene)
+    {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+           public void handle(final KeyEvent k)
+           {
+               
+               switch(k.getCode())
+               {
+                   case UP:
+                      obj_g.mouvement(Grille.Direction.HAUT);
+                      obj_g.notifyObserver();
+                      break;
+                   case DOWN:
+                       obj_g.mouvement(Grille.Direction.BAS);
+                       obj_g.notifyObserver();
+                       break;
+                   case LEFT:
+                       obj_g.mouvement(Grille.Direction.GAUCHE);
+                       obj_g.notifyObserver();
+                       break;
+                   case RIGHT:
+                       obj_g.mouvement(Grille.Direction.DROITE);
+                       obj_g.notifyObserver();
+                       break;
+                   default:
+                       break;
+               }
+           }
+       });
+    }
 
     /**
      * @param args the command line arguments
